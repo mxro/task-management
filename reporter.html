@@ -315,11 +315,11 @@ html,body {
 			
 			var address= $('.addressInput').val();
 			var secret = $('.secretInput').val();
-			
+			alert("secret: "+secret+" "+AJ.userNodeUri);
 			if (!secret) {
 				secret = AJ.userNodeUri;
 			}
-			
+			alert("secret: "+secret+" "+AJ.userNodeUri);
 			AJ.edit.load(address, secret, function() {
 				var commitTimer = setInterval(function() {
 					AJ.edit.commitOrReload(function() {
