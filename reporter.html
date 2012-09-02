@@ -398,7 +398,7 @@ html,body {
 				});
 			};
 			
-			tr.load(node, secret, callback) {
+			tr.load = function(node, secret, callback) {
 				
 				if (tr.commitTimer) {
 					clearInterval(tr.commitTimer);
@@ -421,7 +421,7 @@ html,body {
 			
 		};
 		
-	}) (jQuery, AJ);'
+	}) (jQuery, AJ);
 	
 	function AJ_loginCompleted(aj, userLoggedIn) {
 
