@@ -156,7 +156,7 @@ html,body {
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 		<div class="push"></div>
 	</div>
@@ -275,95 +275,163 @@ html,body {
 
 	<script>
 
+	
+	(function($, AJ) {
+		
+		$.initTimeReporter = function(client, elem) {
+			
+			tr = {};
+			tr.edit = null;
+			tr.commitTimer = null;
+			
+			tr.edit = $.initAjEdit($(".editorContent", elem), client);
+			
+			tr.edit.setEditorFactory(function() {
+				$(".editorContent", elem).show(); // to assure codemirror is
+				// rendered
+				// correctly.
+
+				var editorElem = $(".textArea", elem).get(0);
+				if (!editorElem) {
+					throw "Editor element is not defined: " + elem
+							+ ".textArea";
+				}
+
+				var editor = CodeMirror.fromTextArea(editorElem, {
+					// mode: 'markdown',
+					lineNumbers : true,
+					matchBrackets : true,
+					theme : "default",
+					indentWithTabs : true,
+					lineWrapping : true,
+					onChange : function(editor, changeParams) {
+						
+					}
+				});
+
+				return editor;
+			});
+			
+			tr.edit.setTextChangeListener(function() {
+				
+
+			});
+			
+			$('.loadButton', elem).click(function(evt) {
+				evt.preventDefault();
+				
+				var address= $('.addressInput', elem).val();
+				var secret = $('.secretInput', elem).val();
+				
+				if (!secret) {
+					secret = AJ.userNodeSecret;
+				}
+				
+				tr.load(client.reference(address), secret, function() {
+					$('.nodeDetails', elem).hide();
+					$('.timeReporter', elem).show();
+				});
+				
+				
+			});
+			
+			var startTime = null;
+			
+			var showTimeTimer = setInterval(function() {
+				if (startTime) {
+					var minutes = (new Date().getTime() - startDate.getTime() ) / (1000 * 60)+" ";
+					
+					$('.passedTime').html(minutes.substring(0, 5));
+				}
+			}, 1000);
+			
+			
+			
+			$('.startWorkButton', elem).click(function() {
+				startDate = new Date();
+			});
+			
+			$('.stopWorkButton', elem).click(function() {
+				
+				$('.passedTime', elem).html("");
+				var codemirror = tr.edit.getEditor();
+				
+				var stopDate = new Date();
+				
+				var minutes = (stopDate.getTime() - startTime.getTime() ) / (1000 * 60)+" ";
+				
+				codemirror.setValue(codemirror.getValue()+
+						"\nWorked "+minutes.substring(0, 5)+" --> [] / "+
+						"from: "+startDate.getHours()+":"+startData.getMinutes()+
+						" to "+endDate.getHours()+":" +endData.getMinutes()+" \n\n");
+				
+				
+				startTime = null;
+				
+			});
+			
+			tr.readHash = function(hash, callback) {
+				if (!hash || hash === null || hash === "" || hash === "#") {
+					callback(false);
+					return;
+				}
+
+				var link = AJ.utils.parseAppLink(hash);
+
+				if (!link.address) {
+					callback(false);
+					return;
+				}
+
+				if (link.secret === null) {
+					link.secret = AJ.userNodeSecret;
+				}
+
+				if (!AJ.userNodeUri) {
+					
+				}
+
+				tr.load(client.reference(link.address), link.secret, function() {
+					$('.nodeDetails', elem).hide();
+					$('.timeReporter', elem).show();
+					callback(true);
+				});
+			};
+			
+			tr.load(node, secret, callback) {
+				
+				if (tr.commitTimer) {
+					clearInterval(tr.commitTimer);
+				}
+				
+				tr.edit.load(address, secret, function() {
+
+					tr.commitTimer = setInterval(function() {
+						tr.edit.commitOrReload(function() {
+							
+						});
+						}, 2000);
+				});
+			};
+			
+			return {
+				readHash: tr.readHash,
+				load: tr.load
+			};
+			
+		};
+		
+	}) (jQuery, AJ);'
+	
 	function AJ_loginCompleted(aj, userLoggedIn) {
 
 		var client = aj.createClient();
 		
 		var elem = $(document);
 		
-		AJ.edit = $.initAjEdit($(".editorContent"), client);
+		var timereporter = $.initTimeReporter(client, elem);
 		
-		AJ.edit.setEditorFactory(function() {
-			$(".editorContent", elem).show(); // to assure codemirror is
-			// rendered
-			// correctly.
-
-			var editorElem = $(".textArea", elem).get(0);
-			if (!editorElem) {
-				throw "Editor element is not defined: " + elem
-						+ ".textArea";
-			}
-
-			var editor = CodeMirror.fromTextArea(editorElem, {
-				// mode: 'markdown',
-				lineNumbers : true,
-				matchBrackets : true,
-				theme : "default",
-				indentWithTabs : true,
-				lineWrapping : true,
-				onChange : function(editor, changeParams) {
-					
-				}
-			});
-
-			return editor;
-		});
-		
-		AJ.edit.setTextChangeListener(function() {
-			
-
-		});
-		
-		$('.loadButton').click(function(evt) {
-			evt.preventDefault();
-			
-			var address= $('.addressInput').val();
-			var secret = $('.secretInput').val();
-			
-			if (!secret) {
-				secret = AJ.userNodeSecret;
-			}
-			
-			AJ.edit.load(address, secret, function() {
-				$('.nodeDetails').hide();
-				$('.timeReporter').show();
-				
-				var commitTimer = setInterval(function() {
-					AJ.edit.commitOrReload(function() {
-						
-					});
-				}, 2000);
-			});
-		});
-		
-		var startTime = null;
-		
-		var showTimeTimer = setInterval(function() {
-			if (startTime) {
-				var minutes = (new Date().getTime() - startTime ) / (1000 * 60)+" ";
-				
-				$('.passedTime').html(minutes.substring(0, 5));
-			}
-		}, 1000);
-		
-		
-		
-		$('.startWorkButton').click(function() {
-			startTime = new Date().getTime();
-		});
-		
-		$('.stopWorkButton').click(function() {
-			
-			$('.passedTime').html("");
-			var codemirror = AJ.edit.getEditor();
-			
-			var minutes = (new Date().getTime() - startTime ) / (1000 * 60)+" ";
-			
-			codemirror.setValue(codemirror.getValue()+"\nWorked "+minutes.substring(0, 5)+" --> [] / \n\n");
-			
-			startTime = null;
-			
-		});
+		timereporter.readHash();
 		
 	}
 
