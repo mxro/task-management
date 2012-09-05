@@ -2,7 +2,7 @@
 
 (function($) {
 
-	$.initTimeReporterUi = function(params) {
+	$.initTimeReporterForm = function(params) {
 
 		var elem = params.elem;
 
