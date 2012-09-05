@@ -101,11 +101,13 @@ html,body {
 
 			<div class="row-fluid">
 				<div class="span12">
+					<div id="timereporterportal">
+						<!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/time-reporter-portal-html-0.0.1") -->
+					</div>
+
 					<div id="timereporterform" style="display: none">
 						<!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/time-reporter-form-html-0.0.1") -->
 					</div>
-
-
 				</div>
 
 
@@ -200,11 +202,11 @@ html,body {
 </script>
 
 	<script>
-// 
-<!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/strategy-question-form-js-0.0.1") -->
-// 
+//
+<!-- one.embedText("https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/time-reporter-portal-js-0.0.1") -->
+//
+</script>
 
-	</script>
 
 	<script>
 // 
@@ -214,7 +216,7 @@ html,body {
 
 	<script>
 
-	
+	var trp = null;
 	var trf = null;
 	
 	function AJ_loginCompleted(aj, userLoggedIn) {
@@ -233,7 +235,7 @@ html,body {
 		AJ.progressBar=$.ajInitProgressBar($("#ajprogressbar"));
 		
 		trf = $.initTimeReporterForm({elem: $("#timereporterform")});
-		
+		trp = $.initTimeReporterPortal({elem: $("#timereporterportal")});
 	}
 
 	window.onload = function() {
