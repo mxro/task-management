@@ -43,8 +43,16 @@
 
 			$('.project', elem).val("1");
 
+			$('.startButton', elem).removeAttr('disabled');
+			
+			elem.show();
+
 		};
 
+		tr.hide = function() {
+			elem.hide();
+		};
+		
 		tr.start = function() {
 			$('.timerDetails', elem).fadeIn('fast');
 			tr.priv.startTimer();
@@ -113,6 +121,7 @@
 			evt.preventDefault();
 			tr.start();
 			$('.startButton', elem).attr('disabled', 'disabled');
+			$('.finalizeButton', elem).removeAttr('disabled');
 		});
 
 		$('.pauseNow', elem).click(function(evt) {
@@ -141,6 +150,7 @@
 
 		return {
 			show : tr.show,
+			hide: tr.hide,
 			start : tr.start,
 			finalize : tr.finalize
 		};

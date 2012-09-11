@@ -25,9 +25,14 @@
 					if (operation === "existingPage") {
 						
 						var nodeAddress = $('.nodeAddress', elem)
+
+						$('.portal', elem).hide();
 						
-						
-						
+						form.show(function(timeData) {
+							form.hide();
+							$('.portal', elem).show();
+							
+						});
 						
 						return;
 					}
