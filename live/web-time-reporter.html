@@ -219,7 +219,7 @@ html,body {
 	
 	function AJ_loginCompleted(aj, userLoggedIn) {
 
-		var client = aj.createClient();
+		
 		
 		
 		
@@ -232,8 +232,10 @@ html,body {
 		AJ.navbar = $.ajInitNavbar($("#ajnavbar"), aj);
 		AJ.progressBar=$.ajInitProgressBar($("#ajprogressbar"));
 		
+		var client = aj.createClient();
 		
-		trp = $.initTimeReporterPortal({elem: $("#timereporterportal")});
+		trp = $.initTimeReporterPortal({elem: $("#timereporterportal"),
+			client: client});
 	}
 
 	window.onload = function() {
