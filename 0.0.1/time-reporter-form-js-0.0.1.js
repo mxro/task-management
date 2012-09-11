@@ -43,6 +43,8 @@
 
 			$('.project', elem).val("1");
 
+			$('.comments', elem).val(" ");
+			
 			$('.startButton', elem).removeAttr('disabled');
 			
 			elem.show();
@@ -66,7 +68,8 @@
 				endDate : new Date(),
 				minutesWorked : tr.minutesWorked,
 				activities : $('.activites', elem).val(),
-				project : $('.project', elem).val()
+				project : $('.project', elem).val(),
+				comments: $('.comments', elem).val()
 			};
 
 			tr.onFinalized(res);
