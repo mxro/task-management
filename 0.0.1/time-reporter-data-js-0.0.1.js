@@ -34,6 +34,8 @@
 
 			trd.priv.submitData(node, timeData);
 
+			trd.priv.appendText(node, timeData);
+			
 		};
 
 		trd.priv = {};
@@ -110,6 +112,53 @@
 				node : aCommentsText,
 				to : comments
 			});
+		};
+
+		trd.priv.generateText = function(timeData) {
+
+			return "Unit [" + timeData.minutesWorked / 30 + " "
+					+ timeData.project + " " + timeData.startDate + " -> "
+					+ timeData.endDate + "]\n\n" + "Activites: "
+					+ timeData.activities + "\n\n" + "Comments: "
+					+ timeData.comments;
+
+		};
+
+		trd.priv.appendText = function(node, timeData) {
+
+			var valueNode = client.dereference({
+				ref : node
+			});
+
+			if (typeof valueNode === 'string' || valueNode instanceof String) {
+
+				client.replace({
+					node : node,
+					withNode : valueNode + "\n"
+							+ trd.priv.generateText(timeData)
+				});
+
+				return;
+			}
+
+			if (valueNode.value
+					&& typeof valueNode.value === 'function'
+					&& (typeof valueNode.value() === 'string' || valueNode
+							.value() instanceof String)) {
+
+				var newValue = client.updateValue({
+					forNode : valueNode,
+					newValue : valueNode.value + "\n"
+							+ trd.priv.generateText(timeData)
+				});
+
+				client.replace({
+					node : node,
+					withNode : newValue
+				});
+
+			}
+
 		};
 
 		return {
