@@ -6,8 +6,11 @@
 
 			var elem = params.elem;
 
+			var form =  $.initTimeReporterForm({elem: $(".timereporterform", elem)});
+			
 			// init ui
 			(function() {
+				
 				
 				$('.reportTimeButton', elem).click(function(evt) {
 					evt.preventDefault();
@@ -22,6 +25,8 @@
 					if (operation === "existingPage") {
 						
 						var nodeAddress = $('.nodeAddress', elem)
+						
+						
 						
 						
 						return;
