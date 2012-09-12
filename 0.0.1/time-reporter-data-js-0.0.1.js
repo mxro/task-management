@@ -33,16 +33,15 @@
 		trd.submit = function(node, timeData, onSuccess) {
 
 			client.appendSafe({
-				node: "unit",
-				to: node,
-				atClosestAddress: './',
-				onSuccess: function(ar) {
+				node : "unit",
+				to : node,
+				atClosestAddress : './',
+				onSuccess : function(ar) {
 					trd.priv.submitData(ar.appendedNode, timeData);
 					trd.priv.appendText(node, timeData);
 					onSuccess(ar.appendedNode);
 				}
 			});
-
 
 		};
 
@@ -132,22 +131,29 @@
 			}
 		};
 
+		/**
+		 * A textual representation of the reported time data.
+		 * 
+		 */
 		trd.priv.generateText = function(timeData) {
-
 			var unitsWorked = timeData.minutesWorked / 30;
-			
-			if ((unitsWorked+" ").length > 5) {
-				unitsWorked = (unitsWorked+" ").substring(0, 4);
+
+			if ((unitsWorked + " ").length > 5) {
+				unitsWorked = (unitsWorked + " ").substring(0, 4);
 			}
-			
-			return "Unit [" + unitsWorked + " "
-					+ timeData.project + " " + timeData.startDate + " -> "
-					+ timeData.endDate + "]\n\n" + "Activites: "
-					+ timeData.activities + "\n\n" + "Comments: "
-					+ timeData.comments;
+
+			return "Unit [" + unitsWorked + " " + timeData.project + " "
+					+ timeData.startDate + " -> " + timeData.endDate + "]\n\n"
+					+ "Activites: " + timeData.activities + "\n\n"
+					+ "Comments: " + timeData.comments;
 
 		};
-
+		
+		
+		/**
+		 * Append a textual representation of reported time data to node,
+		 * if node value is a text format.
+		 */
 		trd.priv.appendText = function(node, timeData) {
 
 			var valueNode = client.dereference({
