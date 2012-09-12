@@ -30,12 +30,20 @@
 
 		var trd = {};
 
-		trd.submit = function(node, timeData) {
+		trd.submit = function(node, timeData, onSuccess) {
 
-			trd.priv.submitData(node, timeData);
+			client.appendSafe({
+				node: "unit",
+				to: node,
+				atClosestAddress: './',
+				onSuccess: function(ar) {
+					trd.priv.submitData(ar.appendedNode, timeData);
+					trd.priv.appendText(node, timeData);
+					onSuccess(ar.appendedNode);
+				}
+			});
 
-			trd.priv.appendText(node, timeData);
-			
+
 		};
 
 		trd.priv = {};
@@ -80,38 +88,48 @@
 				to : minutesWorked
 			});
 
-			var activities = client.append({
-				node : timeData.activities,
-				to : node,
-				atAddress : "./activities"
-			});
+			if (timeData.activities) {
 
-			client.append({
-				node : anActivitiesDescription,
-				to : activities
-			});
+				var activities = client.append({
+					node : timeData.activities,
+					to : node,
+					atAddress : "./activities"
+				});
 
-			var project = client.append({
-				node : timeData.project,
-				to : node,
-				atAddress : "./project"
-			});
+				client.append({
+					node : anActivitiesDescription,
+					to : activities
+				});
 
-			client.append({
-				node : aProjectName,
-				to : project
-			});
+			}
 
-			var comments = client.append({
-				node : timeData.comments,
-				to : node,
-				atAddress : "./comments"
-			});
+			if (timeData.project) {
+				var project = client.append({
+					node : timeData.project,
+					to : node,
+					atAddress : "./project"
+				});
 
-			client.append({
-				node : aCommentsText,
-				to : comments
-			});
+				client.append({
+					node : aProjectName,
+					to : project
+				});
+
+			}
+
+			if (timeData.comments) {
+
+				var comments = client.append({
+					node : timeData.comments,
+					to : node,
+					atAddress : "./comments"
+				});
+
+				client.append({
+					node : aCommentsText,
+					to : comments
+				});
+			}
 		};
 
 		trd.priv.generateText = function(timeData) {
@@ -148,7 +166,7 @@
 
 				var newValue = client.updateValue({
 					forNode : valueNode,
-					newValue : valueNode.value + "\n"
+					newValue : valueNode.value() + "\n"
 							+ trd.priv.generateText(timeData)
 				});
 

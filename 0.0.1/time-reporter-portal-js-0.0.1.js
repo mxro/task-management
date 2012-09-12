@@ -45,12 +45,14 @@
 										form.hide();
 										AJ.ui.showProgressBar();
 
-										data.submit(res.loadedNode, timeData);
+										data.submit(res.loadedNode, timeData, onSuccess: function(appendedNode) {
+											AJ.ui.hideProgressBar();
+											$('.portal', elem).show();
+										});
 
 										client.commit({
 											onSuccess : function() {
-												AJ.ui.hideProgressBar();
-												$('.portal', elem).show();
+												
 											}
 										});
 

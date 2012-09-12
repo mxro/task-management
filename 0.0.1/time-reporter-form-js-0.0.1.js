@@ -67,9 +67,9 @@
 				startDate : tr.startDate,
 				endDate : new Date(),
 				minutesWorked : tr.minutesWorked,
-				activities : $('.activites', elem).val(),
+				activities : $('.activities', elem).val(),
 				project : $('.project', elem).val(),
-				comments: $('.comments', elem).val()
+				comments: $('.comments', elem).val() 
 			};
 
 			tr.onFinalized(res);
