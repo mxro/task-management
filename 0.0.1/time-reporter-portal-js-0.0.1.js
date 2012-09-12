@@ -32,7 +32,7 @@
 
 						if (operation === "existingPage") {
 
-							var nodeAddress = $('.nodeAddress', elem)
+							var nodeAddress = $('.nodeAddress', elem).val();
 
 							$('.portal', elem).hide();
 							AJ.ui.showProgressBar();
