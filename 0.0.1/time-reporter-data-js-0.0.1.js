@@ -134,7 +134,13 @@
 
 		trd.priv.generateText = function(timeData) {
 
-			return "Unit [" + timeData.minutesWorked / 30 + " "
+			var unitsWorked = timeData.minutesWorked / 30;
+			
+			if (unitsWorked.length > 4) {
+				unitsWorked = unitsWorked.substring(0, 4);
+			}
+			
+			return "Unit [" + unitsWorked + " "
 					+ timeData.project + " " + timeData.startDate + " -> "
 					+ timeData.endDate + "]\n\n" + "Activites: "
 					+ timeData.activities + "\n\n" + "Comments: "
