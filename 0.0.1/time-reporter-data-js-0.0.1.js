@@ -136,8 +136,8 @@
 
 			var unitsWorked = timeData.minutesWorked / 30;
 			
-			if (unitsWorked.length > 4) {
-				unitsWorked = unitsWorked.substring(0, 4);
+			if ((unitsWorked+" ").length > 5) {
+				unitsWorked = (unitsWorked+" ").substring(0, 4);
 			}
 			
 			return "Unit [" + unitsWorked + " "
