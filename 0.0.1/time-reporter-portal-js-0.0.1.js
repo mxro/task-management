@@ -45,7 +45,7 @@
 										form.hide();
 										AJ.ui.showProgressBar();
 
-										data.submit(res.loadedNode, timeData, onSuccess: function(appendedNode) {
+										data.submit(res.loadedNode, timeData, function(appendedNode) {
 											AJ.ui.hideProgressBar();
 											$('.portal', elem).show();
 										});
