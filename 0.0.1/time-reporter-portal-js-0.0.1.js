@@ -56,6 +56,11 @@
 											}
 										});
 
+									},
+									function() {
+										// on discard
+										form.hide();
+										$('.portal', elem).show();
 									});
 								}
 							});

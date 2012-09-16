@@ -17,10 +17,12 @@
 		tr.endDate = null;
 		tr.timer = null;
 		tr.onFinalized = null;
+		tr.onDiscard = null;
 		tr.pauseStart = null;
 
-		tr.show = function(onFinalized) {
+		tr.show = function(onFinalized, onDiscard) {
 			tr.onFinalized = onFinalized;
+			tr.onDiscard = onDiscard;
 			tr.startDate = new Date();
 			tr.minutesPaused = 0.0;
 			tr.endData = null;
@@ -74,8 +76,14 @@
 
 			tr.onFinalized(res);
 
-		}
+		};
 
+		tr.discard = function() {
+			tr.priv.stopTimer();
+			
+			tr.onDiscard();
+		};
+		
 		tr.priv = {};
 
 		tr.priv.startTimer = function() {
@@ -149,13 +157,22 @@
 			evt.preventDefault();
 			tr.finalize();
 			$('.finalizeButton', elem).attr('disabled', 'disabled');
+			$('.discardButton', elem).attr('disabled', 'disabled');
 		});
 
+		$('.discardButton', elem).click(function(evt) {
+			evt.preventDefault();
+			tr.discard();
+			$('.finalizeButton', elem).attr('disabled', 'disabled');
+			$('.discardButton', elem).attr('disabled', 'disabled');
+		});
+		
 		return {
 			show : tr.show,
 			hide: tr.hide,
 			start : tr.start,
-			finalize : tr.finalize
+			finalize : tr.finalize,
+			discard: tr.discard
 		};
 	};
 
