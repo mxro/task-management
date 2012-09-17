@@ -120,7 +120,6 @@
 			}
 
 			if (timeData.comments) {
-
 				var comments = client.append({
 					node : timeData.comments,
 					to : node,
@@ -141,7 +140,7 @@
 
 			client.append({
 				node : anEffectivnessRating,
-				tp : effectivenessRating
+				to : effectivenessRating
 			});
 		};
 
