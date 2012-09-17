@@ -28,6 +28,9 @@
 		var aCommentsText = client
 				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/1/1/n/Web_Time_Reporter_Docume/Types/Comments");
 
+		var anEffectivnessRating = client
+				.reference("http://slicnet.com/mxrogm/mxrogm/apps/nodejump/docs/1/1/n/Web_Time_Reporter_Docume/Types/Effectiveness_Rating_");
+
 		var trd = {};
 
 		trd.submit = function(node, timeData, onSuccess) {
@@ -129,6 +132,17 @@
 					to : comments
 				});
 			}
+
+			var effectivenessRating = client.append({
+				node : timeData.effectivenessRating,
+				to : node,
+				atAddress : "./effectivenessRating"
+			});
+
+			client.append({
+				node : anEffectivnessRating,
+				tp : effectivenessRating
+			});
 		};
 
 		/**
@@ -143,16 +157,16 @@
 			}
 
 			return "Unit [" + unitsWorked + " " + timeData.project + " "
-					+ timeData.startDate + " -> " + timeData.endDate + "]\n\n"
-					+ "Activites: " + timeData.activities + "\n\n"
-					+ "Comments: " + timeData.comments;
+					+ timeData.startDate + " -> " + timeData.endDate + " @"
+					+ timeData.effectivenessRating + "]\n\n" + "Activites: "
+					+ timeData.activities + "\n\n" + "Comments: "
+					+ timeData.comments;
 
 		};
-		
-		
+
 		/**
-		 * Append a textual representation of reported time data to node,
-		 * if node value is a text format.
+		 * Append a textual representation of reported time data to node, if
+		 * node value is a text format.
 		 */
 		trd.priv.appendText = function(node, timeData) {
 

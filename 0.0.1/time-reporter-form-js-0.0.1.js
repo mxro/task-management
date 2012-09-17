@@ -15,7 +15,7 @@
 		tr.minutesPaused = null;
 		tr.minutesWorked = null;
 		tr.endDate = null;
-		tr.effectivnessRating = 4;
+		tr.effectivenessRating = 4;
 		tr.timer = null;
 		tr.onFinalized = null;
 		tr.onDiscard = null;
@@ -28,7 +28,7 @@
 			tr.minutesPaused = 0.0;
 			tr.endData = null;
 			tr.minutesWorked = 0.0;
-			tr.effectivnessRating = 4;
+			tr.effectivenessRating = 4;
 			
 			$('.timerDetails', elem).hide();
 
@@ -76,7 +76,8 @@
 				minutesWorked : tr.minutesWorked,
 				activities : $('.activities', elem).val(),
 				project : $('.project', elem).val(),
-				comments: $('.comments', elem).val() 
+				comments: $('.comments', elem).val(),
+				effectivenessRating: tr.effectivenessRating
 			};
 
 			tr.onFinalized(res);
@@ -163,7 +164,7 @@
 			evt.preventDefault();
 			$('.rateButton').removeClass('active');
 			$(this).addClass('active');
-			tr.effectivnessRating = parseInt($('a', this).html());
+			tr.effectivenessRating = parseInt($('a', this).html());
 			
 		});
 		
