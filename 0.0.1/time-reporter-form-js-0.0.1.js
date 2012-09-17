@@ -15,6 +15,7 @@
 		tr.minutesPaused = null;
 		tr.minutesWorked = null;
 		tr.endDate = null;
+		tr.effectivnessRating = 4;
 		tr.timer = null;
 		tr.onFinalized = null;
 		tr.onDiscard = null;
@@ -27,7 +28,8 @@
 			tr.minutesPaused = 0.0;
 			tr.endData = null;
 			tr.minutesWorked = 0.0;
-
+			tr.effectivnessRating = 4;
+			
 			$('.timerDetails', elem).hide();
 
 			$('.startTime', elem).html(new Date() + " ");
@@ -46,6 +48,9 @@
 			$('.project', elem).val("1");
 
 			$('.comments', elem).val(" ");
+			
+			$('.rateButton', elem).removeClass('active');
+			$('.defaultRateButton', elem).addClass('active');
 			
 			$('.startButton', elem).removeAttr('disabled');
 			
@@ -153,6 +158,15 @@
 					$('.unpause', elem).attr('disabled', 'disabled');
 				});
 
+		
+		$('.rateButton', elem).click(function(evt) {
+			evt.preventDefault();
+			$('.rateButton').removeClass('active');
+			$(this).addClass('active');
+			tr.effectivnessRating = parseInt($('a', this).html());
+			
+		});
+		
 		$('.finalizeButton', elem).click(function(evt) {
 			evt.preventDefault();
 			tr.finalize();
