@@ -54,6 +54,7 @@
 			
 			$('.startButton', elem).removeAttr('disabled');
 			
+			
 			elem.show();
 
 		};
@@ -139,6 +140,7 @@
 			tr.start();
 			$('.startButton', elem).attr('disabled', 'disabled');
 			$('.finalizeButton', elem).removeAttr('disabled');
+			$('.discardButton', elem).removeAttr('disabled');
 		});
 
 		$('.pauseNow', elem).click(function(evt) {
