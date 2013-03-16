@@ -71,11 +71,19 @@
 		};
 
 		tr.finalize = function() {
-			tr.priv.stopTimer();
-
+			var l;
+			if (tr.timer) {
+				tr.priv.stopTimer();
+				l.startDate = tr.startDate;
+				l.endDate = new Date();
+			} else {
+				l.startDate = " ";
+				l.endDate = " ";
+			}
+		
 			res = {
-				startDate : tr.startDate,
-				endDate : new Date(),
+				startDate : l.startDate,
+				endDate : l.endDate,
 				minutesWorked : $(".minutesWorked").val(),
 				activities : $('.activities', elem).val(),
 				project : $('.project', elem).val(),
