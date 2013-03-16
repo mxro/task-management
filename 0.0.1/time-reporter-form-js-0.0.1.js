@@ -39,13 +39,13 @@
 			$('.pauseNow', elem).removeAttr('disabled');
 			$('.unpause', elem).attr('disabled', 'disabled');
 
-			$('.minutesWorked', elem).html("0.00");
+			$('.minutesWorked', elem).val("0.000");
 
 			$('.unitsWorked', elem).html("0.00");
 
 			$('.activities', elem).val(" ");
 
-			$('.project', elem).val(" ");
+			$('.project', elem).val("");
 
 			$('.comments', elem).val(" ");
 			
@@ -54,6 +54,8 @@
 			
 			$('.startButton', elem).removeAttr('disabled');
 			
+			$('.finalizeButton', elem).removeAttr('disabled');
+			$('.discardButton', elem).removeAttr('disabled');
 			
 			elem.show();
 
@@ -139,8 +141,7 @@
 			evt.preventDefault();
 			tr.start();
 			$('.startButton', elem).attr('disabled', 'disabled');
-			$('.finalizeButton', elem).removeAttr('disabled');
-			$('.discardButton', elem).removeAttr('disabled');
+			
 		});
 
 		$('.pauseNow', elem).click(function(evt) {
