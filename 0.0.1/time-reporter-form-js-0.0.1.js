@@ -32,7 +32,7 @@
 			
 			//$('.timerDetails', elem).hide();
 
-			$('.startTime', elem).html(new Date() + " ");
+			$('.startTime', elem).html("undefined"/*new Date() + " "*/);
 
 			$('.pausedTime', elem).html("00:00:00");
 
@@ -45,7 +45,7 @@
 
 			$('.activities', elem).val(" ");
 
-			$('.project', elem).val("1");
+			$('.project', elem).val(" ");
 
 			$('.comments', elem).val(" ");
 			
@@ -64,7 +64,7 @@
 		};
 		
 		tr.start = function() {
-			$('.timerDetails', elem).fadeIn('fast');
+			// $('.timerDetails', elem).fadeIn('fast');
 			tr.priv.startTimer();
 		};
 
@@ -97,7 +97,7 @@
 			if (tr.timer) {
 				return;
 			}
-
+			$('.startTime', elem).html(new Date() + " ");
 			tr.timer = setInterval(function() {
 				if (tr.startDate) {
 					var minutesPaused;
@@ -121,7 +121,7 @@
 						pausedTxt = "0.00";
 					}
 					var unitsTxt = units + " ";
-					$('.minutesWorked', elem).html(minutesTxt.substring(0, 5));
+					$('.minutesWorked', elem).val(minutesTxt.substring(0, 5));
 					$('.pausedTime', elem).html(pausedTxt.substring(0, 5));
 					$('.unitsWorked', elem).html(unitsTxt.substring(0, 5));
 				}
