@@ -74,7 +74,7 @@
 			res = {
 				startDate : tr.startDate,
 				endDate : new Date(),
-				minutesWorked : tr.minutesWorked,
+				minutesWorked : $(".minutesWorked").val(),
 				activities : $('.activities', elem).val(),
 				project : $('.project', elem).val(),
 				comments: $('.comments', elem).val(),
