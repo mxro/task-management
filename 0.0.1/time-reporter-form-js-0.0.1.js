@@ -30,7 +30,7 @@
 			tr.minutesWorked = 0.0;
 			tr.effectivenessRating = 4;
 			
-			$('.timerDetails', elem).hide();
+			//$('.timerDetails', elem).hide();
 
 			$('.startTime', elem).html(new Date() + " ");
 
