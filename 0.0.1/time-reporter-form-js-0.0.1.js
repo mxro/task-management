@@ -71,7 +71,7 @@
 		};
 
 		tr.finalize = function() {
-			var l;
+			var l={};
 			if (tr.timer) {
 				tr.priv.stopTimer();
 				l.startDate = tr.startDate;
