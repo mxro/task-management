@@ -63,6 +63,10 @@
 			} else if (type === "manualEntry") {
 				$('.measure').hide();
 				$('.manualEntry').show();
+			} else {
+				
+				alert("Invalid type for time reporting: "+type);
+				throw "Invalid type for time reporting: "+type;
 			}
 			
 			elem.show();

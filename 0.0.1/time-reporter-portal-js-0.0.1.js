@@ -38,7 +38,8 @@
 						secret : AJ.userNodeSecret,
 						onSuccess : function(res) {
 							AJ.ui.hideProgressBar();
-							form.show(type, function(timeData) {
+							form.show(type, 
+							function(timeData) {
 								form.hide();
 								AJ.ui.showProgressBar();
 
