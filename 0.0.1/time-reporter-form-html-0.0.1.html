@@ -1,100 +1,167 @@
 <!-- one.upload https://u1.linnk.it/qc8sbw/usr/apps/textsync/docs/time-reporter-form-html-0.0.1 -->
 
 <div class="container-fluid" style="background-color: white">
-	<div class="row-fluid">
-		<div class="span12">
-			<button class="startButton btn btn-success btn-large btn-block"
-				type="button">Start Measurement</button>
-		</div>
-	</div>
+
+
+
 	<div class="timerDetails">
-		<div class="row-fluid" style="margin-top: 30px;">
 
-			<form class="form-horizontal">
+		<div class="manualEntry">
 
-				<div class="control-group">
-					<label class="control-label" for="startTime">Start Time</label>
-					<div class="controls">
-						<span class="startTime input-xlarge uneditable-input"
-							style="width: 100%" id="startTime">12:23:23</span>
-					</div>
-				</div>
+			<div class="row-fluid" style="margin-top: 30px;">
 
-				<div class="control-group">
-					<label class="control-label" for="pausedTime">Paused</label>
-					<div class="controls">
-						<span class="pausedTime input-xlarge uneditable-input"
-							style="width: 100%" id="pausedTime">00:00:00</span>
-					</div>
-				</div>
-				<div class="control-group">
+				<form class="form-horizontal">
 
-					<div class="controls">
-						<div class="btn-group pull-right">
-							<button class="pauseNow btn btn-mini">Pause Now</button>
-							<button class="unpause btn btn-mini" disabled>Unpause</button>
+					<div class="control-group">
+						<label class="control-label" for="minutesWorked">Minutes
+							Worked</label>
+						<div class="controls">
+
+							<input type="text" placeholder="Type minutes worked ..."
+								class="minutesWorked input-xlarge" style="width: 100%"
+								id="minutesWorked">
 						</div>
 					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="minutesWorked">Minutes
-						Worked</label>
-					<div class="controls">
-						
-						<input type="text" placeholder="Type minutes worked or state measurement ..." class="minutesWorked input-xlarge"
-							style="width: 100%" id="minutesWorked">
-					</div>
-				</div>
-				<!-- <div class="control-group">
-					<label class="control-label" for="unitsWorked">Units Worked</label>
-					<div class="controls">
-						<span class="unitsWorked input-xlarge uneditable-input"
-							style="width: 100%" id="unitsWorked">0.25</span>
-					</div>
-				</div> -->
-				<div class="control-group">
-					<label class="control-label" for="activities">Activities</label>
-					<div class="controls" id="activities">
-						<textarea class="activities" style="width: 100%" rows="7"></textarea>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="startTime">Project</label>
-					<div class="controls">
-						<input class="project input-xlarge" type="text"
-							placeholder="Project name" style="width: 100%">
 
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="comments">Comments</label>
-					<div class="controls" id="comments">
-						<textarea class="comments" style="width: 100%" rows="7"></textarea>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="rateFocus">Rate
-						Focus/Effectiveness</label>
-					<div class="controls" id="rateFocus">
-						<div class="pagination">
-							<ul>
-
-								<li class="rateButton"><a href="#">1</a></li>
-								<li class="rateButton"><a href="#">2</a></li>
-								<li class="rateButton"><a href="#">3</a></li>
-								<li class="rateButton active defaultRateButton"><a href="#">4</a></li>
-								<li class="rateButton"><a href="#">5</a></li>
-								<li class="rateButton"><a href="#">6</a></li>
-								<li class="rateButton"><a href="#">7</a></li>
-							</ul>
+					<div class="control-group">
+						<label class="control-label" for="activities">Activities</label>
+						<div class="controls" id="activities">
+							<textarea class="activities" style="width: 100%" rows="7"></textarea>
 						</div>
 					</div>
-				</div>
-			</form>
+					<div class="control-group">
+						<label class="control-label" for="startTime">Activity</label>
+						<div class="controls">
+							<input class="project input-xlarge" type="text"
+								placeholder="Project name" style="width: 100%">
+
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="comments">Comments</label>
+						<div class="controls" id="comments">
+							<textarea class="comments" style="width: 100%" rows="7"></textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="rateFocus">Rate
+							Focus/Effectiveness</label>
+						<div class="controls" id="rateFocus">
+							<div class="pagination">
+								<ul>
+
+									<li class="rateButton"><a href="#">1</a></li>
+									<li class="rateButton"><a href="#">2</a></li>
+									<li class="rateButton"><a href="#">3</a></li>
+									<li class="rateButton active defaultRateButton"><a
+										href="#">4</a></li>
+									<li class="rateButton"><a href="#">5</a></li>
+									<li class="rateButton"><a href="#">6</a></li>
+									<li class="rateButton"><a href="#">7</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
+
+		<div class="measure">
+			<div class="row-fluid">
+				<div class="span12">
+					<button class="startButton btn btn-success btn-large btn-block"
+						type="button">Start Measurement</button>
+				</div>
+			</div>
+
+			<div class="row-fluid" style="margin-top: 30px;">
+
+				<form class="form-horizontal">
+
+					<div class="control-group">
+						<label class="control-label" for="startTime">Start Time</label>
+						<div class="controls">
+							<span class="startTime input-xlarge uneditable-input"
+								style="width: 100%" id="startTime">12:23:23</span>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label" for="pausedTime">Paused</label>
+						<div class="controls">
+							<span class="pausedTime input-xlarge uneditable-input"
+								style="width: 100%" id="pausedTime">00:00:00</span>
+						</div>
+					</div>
+					<div class="control-group">
+
+						<div class="controls">
+							<div class="btn-group pull-right">
+								<button class="pauseNow btn btn-mini">Pause Now</button>
+								<button class="unpause btn btn-mini" disabled>Unpause</button>
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="minutesWorked">Minutes
+							Worked</label>
+						<div class="controls">
+
+							<input type="text"
+								placeholder="Type minutes worked or state measurement ..."
+								class="minutesWorked input-xlarge" style="width: 100%"
+								id="minutesWorked">
+						</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label" for="activities">Activities</label>
+						<div class="controls" id="activities">
+							<textarea class="activities" style="width: 100%" rows="7"></textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="startTime">Activity</label>
+						<div class="controls">
+							<input class="project input-xlarge" type="text"
+								placeholder="Project name" style="width: 100%">
+
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="comments">Comments</label>
+						<div class="controls" id="comments">
+							<textarea class="comments" style="width: 100%" rows="7"></textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="rateFocus">Rate
+							Focus/Effectiveness</label>
+						<div class="controls" id="rateFocus">
+							<div class="pagination">
+								<ul>
+
+									<li class="rateButton"><a href="#">1</a></li>
+									<li class="rateButton"><a href="#">2</a></li>
+									<li class="rateButton"><a href="#">3</a></li>
+									<li class="rateButton active defaultRateButton"><a
+										href="#">4</a></li>
+									<li class="rateButton"><a href="#">5</a></li>
+									<li class="rateButton"><a href="#">6</a></li>
+									<li class="rateButton"><a href="#">7</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+
+		</div>
+
 
 		<div class="row-fluid">
-			
+
 
 			<div class="span10">
 
@@ -103,7 +170,7 @@
 
 
 			</div>
-			
+
 			<div class="span2">
 				<button class="discardButton btn btn-danger btn-large btn-block">Discard
 					Work Unit</button>

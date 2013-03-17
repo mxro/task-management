@@ -18,55 +18,66 @@
 		// init ui
 		(function() {
 
-			$('.reportTimeButton', elem).click(
+			var showEntry = function(type) {
+				var operation = $('input[name=optionsRadios]:checked',
+						elem).val();
+
+				if (operation === "newPage") {
+					alert("Operation not supported yet.");
+					return;
+				}
+
+				if (operation === "existingPage") {
+
+					var nodeAddress = $('.nodeAddress', elem).val();
+
+					$('.portal', elem).hide();
+					AJ.ui.showProgressBar();
+					client.load({
+						url : nodeAddress,
+						secret : AJ.userNodeSecret,
+						onSuccess : function(res) {
+							AJ.ui.hideProgressBar();
+							form.show(type, function(timeData) {
+								form.hide();
+								AJ.ui.showProgressBar();
+
+								data.submit(res.loadedNode, timeData, function(appendedNode) {
+									AJ.ui.hideProgressBar();
+									$('.portal', elem).show();
+								});
+
+								client.commit({
+									onSuccess : function() {
+										
+									}
+								});
+
+							},
+							function() {
+								// on discard
+								form.hide();
+								$('.portal', elem).show();
+							});
+						}
+					});
+
+					return;
+				}
+			};
+			
+			$('.measureTimeButton', elem).click(
 					function(evt) {
 						evt.preventDefault();
 
-						var operation = $('input[name=optionsRadios]:checked',
-								elem).val();
+						showEntry("measureTime");
+					});
+			
+			$('.manualEntryButton', elem).click(
+					function(evt) {
+						evt.preventDefault();
 
-						if (operation === "newPage") {
-							alert("Operation not supported yet.");
-							return;
-						}
-
-						if (operation === "existingPage") {
-
-							var nodeAddress = $('.nodeAddress', elem).val();
-
-							$('.portal', elem).hide();
-							AJ.ui.showProgressBar();
-							client.load({
-								url : nodeAddress,
-								secret : AJ.userNodeSecret,
-								onSuccess : function(res) {
-									AJ.ui.hideProgressBar();
-									form.show(function(timeData) {
-										form.hide();
-										AJ.ui.showProgressBar();
-
-										data.submit(res.loadedNode, timeData, function(appendedNode) {
-											AJ.ui.hideProgressBar();
-											$('.portal', elem).show();
-										});
-
-										client.commit({
-											onSuccess : function() {
-												
-											}
-										});
-
-									},
-									function() {
-										// on discard
-										form.hide();
-										$('.portal', elem).show();
-									});
-								}
-							});
-
-							return;
-						}
+						showEntry("manualEntry");
 					});
 		})();
 

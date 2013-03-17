@@ -21,7 +21,7 @@
 		tr.onDiscard = null;
 		tr.pauseStart = null;
 
-		tr.show = function(onFinalized, onDiscard) {
+		tr.show = function(type, onFinalized, onDiscard) {
 			tr.onFinalized = onFinalized;
 			tr.onDiscard = onDiscard;
 			tr.startDate = new Date();
@@ -56,6 +56,14 @@
 			
 			$('.finalizeButton', elem).removeAttr('disabled');
 			$('.discardButton', elem).removeAttr('disabled');
+			
+			if (type === "measureTime") {
+				$('.measure').show();
+				$('.manualEntry').hide();
+			} else if (type === "manualEntry") {
+				$('.measure').hide();
+				$('.manualEntry').show();
+			}
 			
 			elem.show();
 
