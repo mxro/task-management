@@ -60,6 +60,7 @@
 			if (type === "measureTime") {
 				$('.measure').show();
 				$('.manualEntry').hide();
+				tr.start();
 			} else if (type === "manualEntry") {
 				$('.measure').hide();
 				$('.manualEntry').show();
