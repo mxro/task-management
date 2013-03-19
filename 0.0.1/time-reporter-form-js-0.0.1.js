@@ -69,10 +69,10 @@
 			$('.rateButton', elem).removeClass('active');
 			$('.defaultRateButton', elem).addClass('active');
 			
-			$('.startButton', elem).removeAttr('disabled');
+			$('.startButton', rootElem).removeAttr('disabled');
 			
-			$('.finalizeButton', elem).removeAttr('disabled');
-			$('.discardButton', elem).removeAttr('disabled');
+			$('.finalizeButton', rootElem).removeAttr('disabled');
+			$('.discardButton', rootElem).removeAttr('disabled');
 			
 			
 			rootElem.show();
