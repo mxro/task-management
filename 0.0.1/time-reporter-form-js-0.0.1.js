@@ -81,7 +81,7 @@
 		};
 
 		tr.hide = function() {
-			elem.hide();
+			rootElem.hide();
 		};
 		
 		tr.start = function() {
@@ -103,7 +103,7 @@
 			res = {
 				startDate : l.startDate,
 				endDate : l.endDate,
-				minutesWorked : $(".minutesWorked").val(),
+				minutesWorked : $('.minutesWorked', elem).val(),
 				activities : $('.activities', elem).val(),
 				project : $('.project', elem).val(),
 				comments: $('.comments', elem).val(),
@@ -164,7 +164,7 @@
 
 		// init Ui
 
-		$('.startButton', rootrootElem).click(function(evt) {
+		$('.startButton', rootElem).click(function(evt) {
 			evt.preventDefault();
 			tr.start();
 			$('.startButton', rootElem).attr('disabled', 'disabled');
