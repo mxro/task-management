@@ -4,10 +4,12 @@
 
 	$.initTimeReporterForm = function(params) {
 
-		var elem = params.elem;
-
-		if (elem.length <= 0)
+		var rootElem = params.elem;
+		var elem = null;
+		
+		if (rootElem.length <= 0) {
 			throw "Please define valid element";
+		}
 
 		var tr = {};
 
@@ -22,6 +24,21 @@
 		tr.pauseStart = null;
 
 		tr.show = function(type, onFinalized, onDiscard) {
+			if (type === "measureTime") {
+				elem = $(".measure", rootElem);
+				$('.measure').show();
+				$('.manualEntry').hide();
+				tr.start();
+			} else if (type === "manualEntry") {
+				elem = $(".manualEntry", rootElem);
+				$('.measure').hide();
+				$('.manualEntry').show();
+			} else {
+				
+				alert("Invalid type for time reporting: "+type);
+				throw "Invalid type for time reporting: "+type;
+			}
+			
 			tr.onFinalized = onFinalized;
 			tr.onDiscard = onDiscard;
 			tr.startDate = new Date();
@@ -57,19 +74,8 @@
 			$('.finalizeButton', elem).removeAttr('disabled');
 			$('.discardButton', elem).removeAttr('disabled');
 			
-			if (type === "measureTime") {
-				$('.measure').show();
-				$('.manualEntry').hide();
-				tr.start();
-			} else if (type === "manualEntry") {
-				$('.measure').hide();
-				$('.manualEntry').show();
-			} else {
-				
-				alert("Invalid type for time reporting: "+type);
-				throw "Invalid type for time reporting: "+type;
-			}
 			
+			rootElem.show();
 			elem.show();
 
 		};
@@ -158,33 +164,33 @@
 
 		// init Ui
 
-		$('.startButton', elem).click(function(evt) {
+		$('.startButton', rootrootElem).click(function(evt) {
 			evt.preventDefault();
 			tr.start();
-			$('.startButton', elem).attr('disabled', 'disabled');
+			$('.startButton', rootElem).attr('disabled', 'disabled');
 			
 		});
 
-		$('.pauseNow', elem).click(function(evt) {
+		$('.pauseNow', rootElem).click(function(evt) {
 			evt.preventDefault();
 			tr.pauseStart = new Date();
-			$('.unpause', elem).removeAttr('disabled');
-			$('.pauseNow', elem).attr('disabled', 'disabled');
+			$('.unpause', rootElem).removeAttr('disabled');
+			$('.pauseNow', rootElem).attr('disabled', 'disabled');
 		});
 
-		$('.unpause', elem).click(
+		$('.unpause', rootElem).click(
 				function(evt) {
 					evt.preventDefault();
 					tr.minutesPaused = tr.minutesPaused
 							+ (new Date().getTime() - tr.pauseStart.getTime())
 							/ (1000 * 60);
 					tr.pauseStart = null;
-					$('.pauseNow', elem).removeAttr('disabled');
-					$('.unpause', elem).attr('disabled', 'disabled');
+					$('.pauseNow', rootElem).removeAttr('disabled');
+					$('.unpause', rootElem).attr('disabled', 'disabled');
 				});
 
 		
-		$('.rateButton', elem).click(function(evt) {
+		$('.rateButton', rootElem).click(function(evt) {
 			evt.preventDefault();
 			$('.rateButton').removeClass('active');
 			$(this).addClass('active');
@@ -192,18 +198,18 @@
 			
 		});
 		
-		$('.finalizeButton', elem).click(function(evt) {
+		$('.finalizeButton', rootElem).click(function(evt) {
 			evt.preventDefault();
 			tr.finalize();
-			$('.finalizeButton', elem).attr('disabled', 'disabled');
-			$('.discardButton', elem).attr('disabled', 'disabled');
+			$('.finalizeButton', rootElem).attr('disabled', 'disabled');
+			$('.discardButton', rootElem).attr('disabled', 'disabled');
 		});
 
-		$('.discardButton', elem).click(function(evt) {
+		$('.discardButton', rootElem).click(function(evt) {
 			evt.preventDefault();
 			tr.discard();
-			$('.finalizeButton', elem).attr('disabled', 'disabled');
-			$('.discardButton', elem).attr('disabled', 'disabled');
+			$('.finalizeButton', rootElem).attr('disabled', 'disabled');
+			$('.discardButton', rootElem).attr('disabled', 'disabled');
 		});
 		
 		return {
